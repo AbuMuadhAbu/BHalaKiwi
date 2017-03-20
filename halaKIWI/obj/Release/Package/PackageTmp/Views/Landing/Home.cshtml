@@ -1,0 +1,493 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>KIWI</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!--favicons-->
+    <link rel="apple-touch-icon" sizes="57x57" href="favicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="faicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="manifest" href="favicons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!--end of favicons-->
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="vendor/device-mockups/device-mockups.min.css">
+    <!-- Theme CSS -->
+    <link href="css/new-age.min.css" rel="stylesheet">
+
+    <!-- slider CSS -->
+    <link href="css/slider.css" rel="stylesheet">
+    <!--counter css-->
+    <link href="css/counter-landing.css" rel="stylesheet" />
+    <!--load amimate.css from CDN-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">
+    <!--load WOW js from CDN-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <!--Initiate WOW js, can be at the bottom of your file -->
+    <script>
+        wow = new WOW(
+          {
+              boxClass: 'wow',      // default
+              animateClass: 'animated', // change this if you are not using animate.css
+              offset: 0,          // default
+              mobile: true,       // keep it on mobile
+              live: true        // track if element updates
+          }
+          )
+        wow.init();
+    </script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-90731124-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body id="page-top">
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">
+                    <img src="img/logo.jpg" style="width: 100px; border-radius:50%;border-color: white;border-width: thick;border-style: solid;">
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="#download">Download</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#features">Features</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="header-content">
+                        <div class="header-content-inner">
+                            <!--<div class="btn-bar">
+                              <div id="buttons">
+                                <a id="prev" href="#">&lt;</a>
+                                <a id="next" href="#">&gt;</a>
+                              </div>
+                            </div>-->
+                            <div id="slider">
+                                <ul class="slides">
+                                    <li class="slide slide1">
+                                        <h1>Get KIWI to see tailored food offers from restaurants around you</h1>
+
+                                    </li>
+                                    <li class="slide slide2">
+                                        <h1>Avail your favorite offer in 3 clicks and pay directly to restaurant by cash or card</h1>
+                                    </li>
+                                    <li class="slide slide3">
+                                        <h1>Have complete control on branding and content of offers for your restaurant</h1>
+                                    </li>
+                                    <li class="slide slide4">
+                                        <h1>Sign up to become a beta tester and stand a chance to win the Gear S2</h1>
+                                        <a href="#contact" class="btn btn-outline btn-xl page-scroll">SignUp Now!</a>
+                                    </li>
+                                    <li class="slide slide5"> </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="device-container">
+                        <div class="device-mockup iphone6_plus portrait white">
+                            <div class="device">
+                                <div class="screen">
+                                    <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+                                    <img src="img/03_List_02.png" class="img-responsive" alt="">
+                                </div>
+                                <div class="button">
+                                    <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="download" class="download bg-primary text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h2 class="section-heading wow slideInDown">Stay Tuned. App Releasing In </h2>
+                    <br>
+                    <div class="countdown-container">
+                        <div class="clock-item clock-days countdown-time-value">
+                            <div class="wrap">
+                                <div class="inner">
+                                    <div id="canvas_days" class="clock-canvas"></div>
+                                    <div class="text">
+                                        <p class="val">0</p>
+                                        <p class="type-days type-time">DAYS</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clock-item clock-hours countdown-time-value">
+                            <div class="wrap">
+                                <div class="inner">
+                                    <div id="canvas_hours" class="clock-canvas"></div>
+                                    <div class="text">
+                                        <p class="val">0</p>
+                                        <p class="type-hours type-time">HOURS</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clock-item clock-minutes countdown-time-value">
+                            <div class="wrap">
+                                <div class="inner">
+                                    <div id="canvas_minutes" class="clock-canvas"></div>
+                                    <div class="text">
+                                        <p class="val">0</p>
+                                        <p class="type-minutes type-time">MINS</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clock-item clock-seconds countdown-time-value">
+                            <div class="wrap">
+                                <div class="inner">
+                                    <div id="canvas_seconds" class="clock-canvas"></div>
+                                    <div class="text">
+                                        <p class="val">0</p>
+                                        <p class="type-seconds type-time">SECS</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.countdown-wrapper start
+                    <div class="countdown-container wow slideInUp">
+                        <div class="clock-item clock-days countdown-time-value">
+                            <div class="wrap">
+                                <div class="inner">
+                                <div class="outer" style="border-color:#9eb63e"></div>
+                                    <div id="canvas_days" class="clock-canvas"></div>
+                                    <div class="text">
+                                        <p class="val">0</p>
+                                        <p class="type-days type-time">DAYS</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clock-item clock-hours countdown-time-value">
+                            <div class="wrap">
+                                <div class="inner">
+                                <div class="outer" style="border-color:#3fb0c2"></div>
+                                    <div id="canvas_hours" class="clock-canvas"></div>
+                                    <div class="text">
+                                        <p class="val">0</p>
+                                        <p class="type-hours type-time">HOURS</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clock-item clock-minutes countdown-time-value">
+                            <div class="wrap">
+                                <div class="inner">
+                                <div class="outer" style="border-color:#dc2a0c"></div>
+                                    <div id="canvas_minutes" class="clock-canvas"></div>
+                                    <div class="text">
+                                        <p class="val">0</p>
+                                        <p class="type-minutes type-time">MINUTES</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clock-item clock-seconds countdown-time-value">
+                            <div class="wrap">
+                                <div class="inner">
+                                <div class="outer" style="border-color:#d38c27"></div>
+                                    <div id="canvas_seconds" class="clock-canvas"></div>
+                                    <div class="text">
+                                        <p class="val">0</p>
+                                        <p class="type-seconds type-time">SECONDS</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.countdown-wrapper end-->
+
+
+                    <div class="badges" style="margin-top: 100px;">
+                        <a class="badge-link wow slideInLeft" href="#"><img src="img/google-play-badge.svg" alt=""></a>
+                        <a class="badge-link wow slideInRight" href="#"><img src="img/app-store-badge.svg" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="features" class="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="section-heading">
+                        <h2 class="wow slideInDown">Unlimited Features, Unlimited Fun</h2>
+                        <p class="text-muted wow slideInUp">See What KIWI Can Do For You!</p>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="device-container wow slideInLeft">
+                        <div class="device-mockup iphone6_plus portrait white">
+                            <div class="device">
+                                <div class="screen">
+                                    <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+                                    <video class="img-responsive video-responsive" alt="kiwi" loop>
+                                        <source src="img/kiwi_vid.mov" type="video/mov">
+                                        <source src="img/kiwi_vid.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="button">
+                                    <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="feature-item wow slideInLeft">
+                                    <i class="text-primary"><img src="img/UserExperience_icon.png"></i>
+                                    <h3>User Experience</h3>
+                                    <p class="text-muted">Paramount in app design to ensure quickest journey from viewing to avail offer</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="feature-item wow slideInRight">
+                                    <i class="text-primary"><img src="img/personalized_icon.png"></i>
+                                    <h3>Personalized Offers</h3>
+                                    <p class="text-muted"> Based on mealtime, budget & cuisine preferences</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="feature-item wow slideInLeft">
+                                    <i class=" text-primary"><img src="img/freeforstudents_icon.png"></i>
+                                    <h3>Free For Students</h3>
+                                    <p class="text-muted"> Find us on your campus to get the voucher code</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="feature-item wow slideInRight">
+                                    <i class="text-primary"><img src="img/dashboard_icon.png"></i>
+                                    <h3>Backend Dashboard</h3>
+                                    <p class="text-muted">Receive app stats. Upload your offer within a minute after filling a 5 field form</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <section class="cta">
+        <div class="cta-content">
+            <div class="container">
+                <h2>For your next meal.<br>Just KIWI It</h2>
+
+            </div>
+        </div>
+        <div class="overlay"></div>
+    </section>
+    <section id="contact" class="contact bg-primary">
+        <div class="container">
+            <h2 class="wow slideInDown">Stay In Touch With Us!</h2>
+            <ul class="list-inline list-social">
+                <li class="social-twitter wow slideInRight">
+                    <a href="https://www.twitter.com/halakiwi" target="_blank"><i class="fa fa-twitter"></i></a>
+                </li>
+                <li class="social-facebook wow slideInUp">
+                    <a href="https://www.facebook.com/halakiwi" target="_blank"><i class="fa fa-facebook"></i></a>
+                </li>
+                <li class="social-google-plus wow slideInLeft">
+                    <a href="https://www.instagram.com/halakiwi" target="_blank"><i class="fa fa-instagram"></i></a>
+                </li>
+            </ul>
+            <br>
+            <div class="signup wow slideInUp">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Enter Email Addresses" id="txtEmailID" />
+                        <input class="btn btn-success" type="button" value="Sign Up" id="btnSave" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year"></span> KIWI. All Rights Reserved.</p>
+            <p>
+                <a href="files/KiwiCompanyProfile.pdf" target="_blank">Download Our Company Profile</a>
+            </p>
+        </div>
+    </footer>
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <!-- Theme JavaScript -->
+    <script src="js/new-age.min.js"></script>
+
+    <!-- slider Jquery -->
+    <script src="js/slider.js"></script>
+
+    <!--countdown -->
+    <script src="js/jquery.final-countdown.js"></script>
+
+    <!--kinetic-->
+    <script src="js/kinetic.js"></script>
+
+
+    <script language="javascript" type="text/javascript">
+
+        function Callback(methodPage, methodName, onSuccess, onFail) {
+            var args = '';
+            var l = arguments.length;
+            if (l > 4) {
+                for (var i = 4; i < l - 1; i += 2) {
+                    if (args.length != 0) args += ',';
+
+                    if (arguments[i + 1].toString().indexOf('[') == 0) {
+                        args += '"' + arguments[i] + '":' + arguments[i + 1] + '';
+                    }
+                    else {
+                        args += '"' + arguments[i] + '":"' + arguments[i + 1] + '"';
+                    }
+                }
+            }
+            $.ajax(
+                    {
+                        type: 'POST',
+                        url: 'kiwi/' + methodPage + '/' + methodName,
+                        cache: false,
+                        data: '{' + args + '}',
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: onSuccess,
+                        fail: onFail
+                    });
+        }
+
+        function fail() {
+
+        }
+        $('.countdown').final_countdown({});
+        $("#btnSave").click(function () {
+            if ($("#txtEmailID").val() != '') {
+                Callback("Landing", "SaveUserRegister", fnSaveUserRegisterSuccess, fail, "EmailID", $("#txtEmailID").val())
+            }
+        });
+        function fnSaveUserRegisterSuccess(msg) {
+            alert(msg[0].Success);
+            //if (msg[0].succesMessage == 2) {
+            //    toastr.info(msg[0].Success);
+            //}
+            //else if (msg[0].succesMessage == 1) {
+            //    toastr.success(msg[0].Success);
+            //}
+        }
+        //copyright year
+        var today = new Date()
+        var year = today.getFullYear()
+        document.getElementById("year").innerHTML = year;
+
+
+        $(document).ready(function () {
+            // Get media - with autoplay disabled (audio or video)
+            var media = $('video').not("[autoplay='autoplay']");
+            var tolerancePixel = 40;
+
+            function checkMedia() {
+                // Get current browser top and bottom
+                var scrollTop = $(window).scrollTop() + tolerancePixel;
+                var scrollBottom = $(window).scrollTop() + $(window).height() - tolerancePixel;
+
+                media.each(function (index, el) {
+                    var yTopMedia = $(this).offset().top;
+                    var yBottomMedia = $(this).height() + yTopMedia;
+
+                    if (scrollTop < yBottomMedia && scrollBottom > yTopMedia) { //view explaination in `In brief` section above
+                        $(this).get(0).play();
+                    } else {
+                        $(this).get(0).pause();
+                    }
+                });
+
+                //}
+            }
+
+            $(document).on('scroll', checkMedia);
+        });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "Manage Gallery";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Scripts.Render("~/KiwiScripts/ManageGalleryjs")
+<link href="~/Scripts/croppie.css" rel="stylesheet" />
+<script src="~/Scripts/croppie.js"></script>
+<div class="inner-right">
+    <div class="right-innerarea">
+        <div class="page-title clearfix">
+            <div class="col-sx-12 col-sm-12 col-md-3 col-lg-3 client-img">
+                <h2>Manage Gallery</h2>
+            </div>
+            <ul class="create-offlist manage-status">
+                <li class="create-icon">
+                    <a href="#uploadimage-popup" data-toggle="modal" title="Upload New Image">Upload New Image</a>
+                </li>
+            </ul>
+        </div>
+        <ul id="listView" class="row gallery-list"></ul>
+        <div id="pager" class="k-pager-wrap"></div>
+
+        <script type="text/x-kendo-template" id="template">
+            <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                <img src="#= Image #" alt="#: ImageTitle #" />
+                <h3>#:ImageTitle#</h3>
+                <p>#:OfferDescription#</p>
+            </li>
+        </script>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        winheight1 = $(document).height();
+        winheight = winheight1;
+        $('.inner-left').css('height', winheight);
+    });
+    $(window).resize(function () {
+        winheight1 = $(document).height();
+        winheight = winheight1;
+        $('.inner-left').css('height', winheight);
+    });
+</script>
+
+<!-- upoad image popup Modal HTML start-->
+<div id="uploadimage-popup" class="modal fade signup-modal mini-modal uploadimage-modal">
+    <div class="modal-dialog">
+        @*<form id="frmmgGallery">*@
+        <div class="modal-content">
+            <h2>Upload Image Dimension(400*200)</h2>
+           
+            <div class="row">
+                <div class="input col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label>Image Title</label>
+                    <input type="text" placeholder="Image Title*" name="imagetitle" id="txtImageTitle" required />
+                </div>
+            </div>
+            <div class="row">
+                <div class="input col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label>Image Description</label>
+                    <textarea class="minitextarea" placeholder="Image Description" name="offerdescripton" id="txtOfferDescription" required></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                    <div id="demo-basic"></div>
+                </div>
+            </div>
+            <div class="row">
+
+                <form id="cropimage" method="post" enctype="multipart/form-data" action="/gallery/UploadImage">
+
+                    <label for="photoimg" title="Upload Property img">
+                        <input type="file" name="photoimg" id="imageUploadForm">
+                    </label>
+                    <input type="hidden" name="hdn-profile-id" id="hdn-profile-id" value="1" />
+                    <input type="hidden" name="hdn-x1-axis" id="hdn-x1-axis" value="" />
+                    <input type="hidden" name="hdn-y1-axis" id="hdn-y1-axis" value="" />
+                    <input type="hidden" name="hdn-x2-axis" value="" id="hdn-x2-axis" />
+                    <input type="hidden" name="hdn-y2-axis" value="" id="hdn-y2-axis" />
+                    <input type="hidden" name="action" value="" id="action" />
+                    <input type="hidden" name="image_name" value="" id="image_name" />
+
+
+
+
+                    <div id="thumbs" style="padding:5px; width:600px"></div>
+                </form>
+                <span class='label label-info' id="upload-file-info"></span>
+                <input type="hidden" class="gllpImage" />
+            </div>
+
+            <div class="submit button-btn">
+                <input class="btn-cancel" type="reset" data-dismiss="modal" value="cancel" />
+                <input class="btn-submit" type="button" value="Submit" id="btnSave" />
+                <input class="btn-submit" type="button" value="Submit" id="btnUpdate" />
+            </div>
+        </div>
+        @*</form>*@
+
+    </div>
+</div>
+<!-- upoad image popup Modal HTML end-->

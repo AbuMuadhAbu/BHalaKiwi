@@ -1,0 +1,193 @@
+﻿
+@{
+    ViewBag.Title = "Outlet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2PvfFNc8RXV5zOIXk1W8_LXaorEGFYQA" async defer></script>
+<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+@Scripts.Render("~/KiwiScripts/AdminOutletjs")
+<script src="~/KiwiScripts/GoogleMaps/jquery-gmaps-latlon-picker.js"></script>
+
+<div class="inner-right">
+    <div id="map"></div>
+
+    <div class="right-innerarea">
+        <div class="page-title clearfix">
+            <div class="col-sx-12 col-sm-6 col-md-6 col-lg-6 client-img">
+                <h2>Outlets List</h2>
+            </div>
+        </div>
+        <div class="table-div th-leftalign td-leftalign">
+            <table id="tableid"></table>
+        </div>
+    </div>
+</div>
+
+<!-- create-outlet-popup Modal HTML start-->
+<div id="set-address-popup" class="modal fade signup-modal set-outlet-modal">
+    <div class="modal-dialog">
+        <form id="location">
+            <input type="hidden" id="hdnUser" />
+            <div class="modal-content">
+                <div class="address-options clearfix">
+                    <h3>Choose the Way you would like to Set Address  !!</h3>
+                    <ul class="clearfix">
+                        <li><input type="radio" name="gps" class=".gpsType" id="rdGPS" value="GPS" /><img src="~/Content/images/gps.png" /><label for="gps">Set using GPS</label></li>
+                        <li><input type="radio" name="gps" class=".gpsType" id="rdMap" value="Map" /><img src="~/Content/images/map-icon.png" /><label for="ongoogle-map">Pin On Google Map</label></li>
+                    </ul>
+                    <p>* Make sure this is the Correct Location. Once Address is set, it cannot be changed</p>
+                </div>
+                <div class="submit button-btn">
+                    <input class="btn-cancel" type="reset" data-dismiss="modal" value="cancel" />
+                    <input class="btn-submit" type="button" value="Update" id="btnLocationUpdate" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- create-outlet-popup Modal HTML start-->
+<div id="create-outlet-popup" class="modal fade signup-modal create-outlet-modal">
+    <div class="modal-dialog">
+        <form id="registration">
+            <div class="modal-content">
+                <h2>Create New Outlet</h2>
+
+                <div class="row">
+                    <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <input type="text" placeholder="Outlet Name*" id="txtOutletName" required name="OutletName" />
+                    </div>
+                    <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <input type="text" placeholder="User Name E-mail ID*" id="txtEmailID" required name="EmailID" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <input type="password" placeholder="Password*" id="txtPassword" required name="password" />
+                    </div>
+                    <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <input type="password" placeholder="Confirm Password*" name="password_confirm" required id="txtConfirmPassword" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <input type="text" placeholder="Phone No*" name="PhoneNo" required id="txtPhoneNo1" />
+                    </div>
+                    <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <input type="text" placeholder="Outlet Cuisine Type" required id="txtCusineType" name="CusineType" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <input type="text" placeholder="Branch Area" required id="txtBranchArea" name="BranchArea" />
+                    </div>
+
+                </div>
+
+                <div class="address-options clearfix">
+                    <h3>Choose the Way you would like to Set Address  !!</h3>
+                    <ul class="clearfix">
+                        <li><input type="radio" name="gps" class=".gpsType" id="rdGPS" value="GPS" /><img src="~/Content/images/gps.png" /><label for="gps">Set using GPS</label></li>
+                        <li><input type="radio" name="gps" class=".gpsType" id="rdMap" value="Map" /><img src="~/Content/images/map-icon.png" /><label for="ongoogle-map">Pin On Google Map</label></li>
+                        <li><input type="radio" name="gps" class=".gpsType" id="rdNotRequired" value="NotRequired" /><label for="set-later">Set Later</label></li>
+                    </ul>
+                    <p>* Make sure this is the Correct Location. Once Address is set, it cannot be changed</p>
+                </div>
+                <div class="submit button-btn">
+                    <input class="btn-cancel" type="reset" data-dismiss="modal" value="cancel" />
+                    <input class="btn-submit" type="button" value="Save" id="btnSave" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- create-outlet-popup Modal HTML end-->
+<!-- googlemap-popup Modal HTML start-->
+<div id="Update-outlet-popup" class="modal fade signup-modal create-outlet-modal">
+    <div class="modal-dialog">
+        <form id="frmupdateOutlet">
+            <div class="modal-content">
+                <h2>Update Outlet</h2>
+
+                <div class="row">
+                    <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <input type="text" placeholder="Outlet Name*" id="txtUpdateOutletName" required name="updateOutletName" />
+                    </div>
+                    <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <input type="text" placeholder="User Name E-mail ID*" id="txtUpdateEmailID" required name="updateEmailID" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <input type="password" placeholder="Password*" id="txtUpdatePassword" required name="updatepassword" />
+                    </div>
+                    <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <input type="password" placeholder="Confirm Password*" name="updatepassword_confirm" required id="txtUpdateConfirmPassword" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <input type="text" placeholder="Phone No*" name="updatePhoneNo" required id="txtUpdatePhoneNo1" />
+                    </div>
+                    <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <input type="text" placeholder="Outlet Cuisine Type" required id="txtUpdateCusineType" name="updateCusineType" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <input type="text" placeholder="Branch Area" required id="txtUpdateBranchArea" name="updateBranchArea" />
+                    </div>
+
+                </div>
+
+                <div class="submit button-btn">
+                    <input class="btn-cancel" type="reset" data-dismiss="modal" value="cancel" />
+                    <input class="btn-submit" type="button" value="Update" id="btnUpdate" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="googlemap-popup" class="modal fade signup-modal googlemap-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="google-map">
+                @*<textarea maxlength="150" id="txtAddress"></textarea>*@
+                <fieldset class="gllpLatlonPicker">
+                    <input type="text" class="gllpSearchField" />
+                    <input type="button" class="gllpSearchButton" value="search" />
+                    <br />
+                    <div class="gllpMap">Google Maps</div>
+                    @*<input type="hidden" class="gllpLatitude" value="38.01689374449758" />
+                        <input type="hidden" class="gllpLongitude" value="-95.99993930000005" />*@
+                    <input type="hidden" class="gllpLatitude" value="" />
+                    <input type="hidden" class="gllpLongitude" value="" />
+                    <input type="hidden" class="gllpZoom" value="4" />
+                </fieldset>
+            </div>
+            <div class="submit button-btn mini-btn">
+                <input class="btn-cancel" type="reset" data-dismiss="modal" value="cancel" />
+                <!--<input class="btn-submit" type="submit" data-dismiss="modal" value="OK" />-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- googlemap-popup Modal HTML end-->
+<!-- setpin-popup Modal HTML start-->
+<div id="setpin-popup" class="modal fade mini-modal setpin-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <p>
+                Make sure this is the Correct Location.<br />
+                Once Address is set, it cannot be changed
+            </p>
+            <div class="submit button-btn mini-btn">
+                <input class="btn-cancel" type="submit" value="GO Back" />
+                <input class="ok-btn" type="reset" data-dismiss="modal" value="OK" />
+            </div>
+        </div>
+    </div>
+</div>
+<!-- setpin-popup Modal HTML end-->

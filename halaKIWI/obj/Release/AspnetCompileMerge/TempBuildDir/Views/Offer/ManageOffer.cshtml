@@ -1,0 +1,287 @@
+﻿
+@{
+    ViewBag.Title = "Offer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Scripts.Render("~/KiwiScripts/ManageOfferjs")
+
+<div class="inner-right">
+    <div class="right-innerarea">
+        <div class="page-title clearfix">
+            <div class="col-sx-12 col-sm-12 col-md-3 col-lg-3 client-img">
+                <h2>Manage Offer</h2>
+            </div>
+            <ul class="create-offlist manage-status">
+                @if (HttpContext.Current.Session["RoleID"].ToString() == "2")
+                {
+                    <li class="drop-list">
+                        <div class="custom-select">
+                            <label>Outlet Name</label>
+                            <select id="ddlOutletFilter" name="Outlet"></select>
+
+                            <span class="select-arrow"></span>
+                        </div>
+                    </li>
+                }
+                <li class="drop-list">
+                    <div class="custom-select">
+                        <label>Offer Status</label>
+                        <select id="ddlOfferStatus" name="Outlet">
+                            <option selected="selected" value="0">Select All</option>
+                            <option value="1">Scheduled Offers</option>
+                            <option value="2">Live Offers</option>
+                            <option value="3">Completed Offers</option>
+                        </select>
+                        <span class="select-arrow"></span>
+                    </div>
+                </li>
+                <li class="create-icon"><a href="#create-newoffer-popup" data-toggle="modal" title="Create New Offer">Create New Offer</a></li>
+            </ul>
+        </div>
+        <div class="table-div th-leftalign td-leftalign">
+            <div class="table-div">
+                <table id="tableid"></table>
+            </div>
+
+        </div>
+        <ul class="col-xs-12 col-sm-12 col-md-12 col-lg-12 useroffer-list">
+            <li class="goto-off" title="Scheduled Offers">Scheduled Offers</li>
+            <li class="live-off" title="Live Offers">Live Offers</li>
+            <li class="completed-off" title="Completed Offers">Completed Offers</li>
+        </ul>
+
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        winheight1 = $(document).height();
+        winheight = winheight1;
+        $('.inner-left').css('height', winheight);
+    });
+    $(window).resize(function () {
+        winheight1 = $(document).height();
+        winheight = winheight1;
+        $('.inner-left').css('height', winheight);
+    });
+</script>
+
+<!-- create-new-popup Modal HTML start-->
+<div id="create-newoffer-popup" class="modal fade signup-modal create-outlet-modal Create-offermodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <h2> Create New offer <a href="javascript:void(0);" data-dismiss="modal" class="close-modal">Close </a></h2>
+            <div class="offer-progress">
+                <ul id="status-bar">
+                    <li class="step-1">
+                        <span class="steps steps-1">1</span>
+                        <span class="off-text">Enter<br />Offer Details</span>
+                    </li>
+                    <li class="offerpro-line"></li>
+                    <li class="step-2">
+                        <span class="steps steps-2">2</span>
+                        <span class="off-text">Select <br />Offer Image</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="entryoffer-details clearfix" id="entryoffer-panel">
+                @*<ul class="choose-offer clearfix">
+                        <li class="radio">
+                            <input type="radio" name="select-chooice" id="choose-outlet" /> <label for="choose-outlet">Choose Outlet</label>
+                        </li>
+                        <li class="radio">
+                            <input type="radio" name="select-chooice" id="broadcast" /> <label for="broadcast">Broadcast</label>
+                        </li>
+                    </ul>*@
+                <div id="outlet-panel" class="choose-outlet-panel">
+                    <form id="frmmgOffer">
+                        <div class="row" id="dvOutletshowhide">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <ul class="choose-offer clearfix">
+                                    <li class="radio">
+                                        <input type="radio" name="select-chooice" id="rdOutlet" checked="checked" /> <label for="choose-outlet">Choose Outlet</label>
+                                    </li>
+                                    <li class="radio">
+                                        <input type="radio" name="select-chooice" id="rdBroadcast" /> <label for="broadcast">Broadcast</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <select id="ddlOutlet" multiple="multiple" name="Outlet"></select>
+                                <label id="txtOutletError" class="help-block">Please Select Outlet</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <label>Offer Name</label>
+                                <input type="text" placeholder="Offer Name*" maxlength="35" name="OfferName" id="txtOfferName" />
+                            </div>
+                            <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <label>Offer Cost</label>
+                                <input type="text" onkeypress="return isNumber(event)" placeholder="Offer Cost" name="OfferCost" id="txtOfferCost" />
+                            </div>
+                        </div>
+                        <div class="row" style="display:none;">
+                            <div class="input col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                                <input type="text" placeholder="Order Available" name="OrderAvailable" id="txtOrderAvailable" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <label>Offer Start Date and Time</label>
+                                <input type="text" placeholder="Offer Start Date and Time" id="txtStartDate" required name="StartDate" />
+                            </div>
+                            <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                <label>Offer End Date and Time</label>
+                                <input type="text" placeholder="Offer End Date and Time" id="txtEndDate" required name="EndDate" />
+                                <span id="txtEndDateerror" class="help-block">Please Select End Date</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                                <label>Delivery</label>
+                                <select id="ddlDelivery" name="Delivery" required>
+                                    <option value="" disabled selected hidden>Please Choose...</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            <div class="input col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                                <label>Offer Description</label>
+                                <textarea class="minitextarea" placeholder="Offer Description" name="OfferDescription" id="txtOfferDescription"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="submit button-btn">
+                            <p class="mandatory-text">Live Offer Details cannot be edited</p>
+                            <input class="btn-cancel" type="reset" data-dismiss="modal" value="cancel" />
+                            <input class="btn-submit" type="button" id="btnNextSave" value="Next" />
+                        </div>
+                    </form>
+                </div>
+                <div id="broadcast-panel" class="broadcast-panel" style="display:none">
+                    <div class="row">
+                        <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6 error-msg">
+                            <input type="text" placeholder="Offer Name*" />
+                            <div class="error-text">
+                                Enter Offer Name
+                            </div>
+                        </div>
+                        <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <input type="text" placeholder="Offer Cost*" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input datebox col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <input type="text" placeholder="Offer Start Date and Time" />
+                        </div>
+                        <div class="input datebox col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <input type="text" placeholder="Offer End Date and Time" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <select id="ddlDelivery" required>
+                                <option value="" disabled selected hidden>Please Choose...</option>
+                                <option value="0">Yes</option>
+                                <option value="1">No</option>
+                            </select>
+                        </div>
+                        <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <textarea class="minitextarea" placeholder="Offer Description"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="submit button-btn">
+                        <p class="mandatory-text">Live Offer Details cannot be edited</p>
+                        <input class="btn-cancel" type="reset" data-dismiss="modal" value="cancel" />
+                        <input class="btn-submit" id="btnNext" type="button" value="Next" />
+                    </div>
+                </div>
+            </div><!-- entry offer details end -->
+            <div class="select-offerimage clearfix" id="selectimage-panel" style="display:none">
+                <ul id="listView" class="offerimage-list clearfix"></ul>
+                <div id="pager" class="k-pager-wrap"></div>
+                <div class="submit button-btn">
+                    <input class="btn-cancel" id="backto-offerdetails" type="submit" value="Back" />
+                    <input class="btn-submit" type="submit" value="Place Offer" id="btnSave" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="dvViewOffer" class="modal fade signup-modal create-outlet-modal Create-offermodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <h2> Offer Details <a href="javascript:void(0);" data-dismiss="modal" class="close-modal">Close </a></h2>
+            <div class="page-title clearfix">
+                <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6 client-img">
+                    <div class="title-img">
+                        <img src="../content/images/kfc.png" id="imgOfferDetail" alt="KFC" />
+                    </div>
+                </div>
+            </div>
+            <div class="inner-formarea">
+                <form id="frupdateOffer">
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                            <label>Offer Name</label>
+                            <input type="text" id="txtVOfferName" name="upOfferName" />
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                            <label>Start Date</label>
+                            <input type="text" id="txtVStartDate" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                            <label>End Date</label>
+                            <input type="text" id="txtVEndDate" />
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                            <label>Offer Cost</label>
+                            <input type="text" onkeypress="return isNumber(event)" id="txtVOfferCost" name="upOfferCost" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                            <label>Delivery</label>
+                            <select id="ddlVDelivery" name="VDelivery" required>
+                                <option value="" disabled selected hidden>Please Choose...</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="input col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                            <label>Offer Description</label>
+                            <textarea class="minitextarea" id="txtVOfferDescription" name="upOfferDescription"></textarea>
+                        </div>
+                        @*<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                                <label>Offer Description</label>
+                                <textarea class="minitextarea" id="txtVOfferDescription"></textarea>
+                            </div>*@
+                    </div>
+                    <div class="submit button-btn">
+                        <input class="btn-cancel" type="reset" data-dismiss="modal" value="cancel" />
+                        <input class="btn-submit" type="button" value="Save" id="btnUpdateOffer" />
+                        <input class="btn-submit" type="button" value="End Offer" id="btnEndOffer" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- create-new-popup Modal HTML end-->
+<script type="text/x-kendo-template" id="template">
+    <li class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <img src="#= Image #" alt="#: ImageTitle #" />
+        <h3>#:ImageTitle#</h3>
+    </li>
+</script>
+<div style="display:none"><select id="ddlOutletFilter" name="Outlet"></select></div>

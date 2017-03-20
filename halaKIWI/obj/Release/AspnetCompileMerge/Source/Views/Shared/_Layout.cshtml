@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    @Styles.Render("~/content/css/bootstrap/bootstrapcss")
+    @Styles.Render("~/content/css/layoutcss")
+    @Styles.Render("~/Content/css/kendoui/kendocss")
+    <script src="~/Content/js/jquery/jquery.js"></script>
+    <script src="~/Content/js/toastr/toastr.js"></script>
+
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/content/js/layoutjs")
+    @Scripts.Render("~/content/js/Commonjs")
+    @Scripts.Render("~/Content/js/validatejs")
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2PvfFNc8RXV5zOIXk1W8_LXaorEGFYQA" async defer></script>
+    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <script src="~/KiwiScripts/GoogleMaps/jquery-gmaps-latlon-picker.js"></script>
+    <script src="~/Scripts/jquery.imgareaselect.js"></script>
+    <link href="~/Scripts/imgareaselect.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.form.js"></script>
+    <script src="~/Scripts/jquery.Jcrop.js"></script>
+    <link href="~/Scripts/jquery.Jcrop.css" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome-4.7.0/font-awesome.min.css" rel="stylesheet" />
+
+    <script>
+        $(document).ready(function () {
+            winheight1 = $(document).height();
+            winheight = winheight1;
+            $('.inner-left').css('height', winheight);
+            //mobile toggle JS
+            $('#mobilemenu').click(function () {
+                $(".inner-left").slideToggle(function () {
+                    $('.inner-left').toggleClass("ipadmenuopen");
+                });
+            });
+
+
+        });
+        $(window).resize(function () {
+            winheight1 = $(document).height();
+            winheight = winheight1;
+            $('.inner-left').css('height', winheight);
+        });
+    </script>
+
+    @*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2PvfFNc8RXV5zOIXk1W8_LXaorEGFYQA" async defer></script>*@
+    @RenderSection("pagestyles", required: false)
+    @RenderSection("Scripts", required: false)
+</head>
+<body id="bdyload">
+    <div class="container-panel">
+        <div class="clearfix header">
+            <div class="ipad-icon">
+                <a href="javascript:void(0);" title="Menu" id="mobilemenu">Menu</a>
+            </div>
+            <h1 class="inner-logo"><a href="#"><img src="~/Content/images/logo.png" alt="KIWI Logo" /></a></h1>
+            <div class="btn-group welcome-user">
+                <a class="dropdown-toggle" href="javaacript:void(0);" data-toggle="dropdown">
+                    @*<img src="../content/images/kfc.png" alt="Profile" />*@
+                    <img src="" class="imgCompany" alt="Profile" />
+                    <span class="wel-text">
+                        @HttpContext.Current.Session["UserName"]
+                        <span class="dogglearrow down"></span>
+                        <span class="dogglearrow up"></span>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="~/Logins/SignOut">LogOut</a></li>
+                    <li><a href="~/Users/ChangePassword">Change Password</a></li>
+                </ul>
+            </div><!-- /btn-group -->
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 res-name">@HttpContext.Current.Session["CompanyName"] </div>
+        </div>
+        @if (HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+            String[] roles = Roles.GetRolesForUser();
+
+            <div class="clearfix main">
+                <div class="inner-left">
+                    <ul class="left-menu">
+                        @if (roles.Contains("UserProfile"))
+                        {
+                            <li class="profile-menu" id="usrProfile">
+                                <a href="~/Users/UserProfile" title="PROFILE DETAILS">PROFILE DETAILS</a>
+                                <ul class="leftsub-menu" id="usrSubMenu">
+                                    <li class="active" id="usrCompanyDetails"><a href="~/Users/UserProfile" title="Company Details">Company Details</a></li>
+                                    @if (roles.Contains("ChangePassword"))
+                                    {
+                                        <li class="" id="usrChangePassword"><a href="~/Users/ChangePassword" title="Change Password">Change Password</a></li>
+                                    }
+                                </ul>
+                            </li>
+                        }@if (roles.Contains("ManageOutlet"))
+                        {
+                            <li class="outlet-menu" id="mgOutlet"><a href="~/Outlet/Outlet" title="MANAGE OUTLETS">MANAGE OUTLETS</a></li>
+                        }
+                        @if (roles.Contains("ManageOffer"))
+                        {
+                            <li class="offer-menu" id="mgOffer"><a href="~/Offer/ManageOffer" title="MANAGE offers">MANAGE offers</a></li>
+                        }
+                        @if (roles.Contains("ImageGallery"))
+                        {
+                            <li class="gallery-menu" id="mgGallery"><a href="~/Gallery/ManageGallery" title="IMAGE GALLERY">IMAGE GALLERY</a></li>
+                        }
+                        @if (roles.Contains("AdminRestaurant"))
+                        {
+                            <li class="profile-menu" id="usrProfile">
+                                <a href="~/Admin/Restaurant" title="PROFILE DETAILS">Restaurant</a>
+                                <ul class="leftsub-menu" id="usrSubMenu">
+                                    <li class="active" id="usrCompanyDetails"><a href="~/Admin/Restaurant" title="Restaurant  Approved">Restaurant Approved</a></li>
+                                    <li class="" id="usrChangePassword"><a href="~/Admin/InactiveRestaurant" title="Inactive Restaurant">Restaurant Yet to be Approved</a></li>
+                                </ul>
+                            </li>
+                        }
+                        @if (roles.Contains("GeneralUser"))
+                        {
+                            <li class="gallery-menu" id="mgGallery"><a href="~/Admin/GeneralUser" title="GeneralUser">General User</a></li>
+                            <li class="gallery-menu" id="mgGallery"><a href="~/Admin/Summary" title="Dashboard">Dashboard</a></li>
+                            <li class="gallery-menu" id="mgGallery"><a href="~/Admin/Cusine" title="Cusine">Cusine</a></li>
+                        }
+
+
+                    </ul>
+                </div>
+            </div>
+        }
+        @RenderBody()
+
+        <div class="copy-rights">
+            Copyrights 2016 KIWI . All Rights Reserved
+        </div>
+    </div>
+    <div class="loadiie"><!-- Place at bottom of page --></div>
+</body>
+</html>
