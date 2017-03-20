@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "Cusine";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Scripts.Render("~/KiwiScripts/AdminCusinejs")
+<div class="inner-right">
+    <div id="map"></div>
+
+    <div class="right-innerarea">
+        <div class="page-title clearfix">
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6 client-img">
+                    <h2>Cusine</h2>
+                </div>
+            </div>
+        </div>
+        <form id="frmmgCusine">
+            <div class="inner-formarea">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                        <input type="text" placeholder="Cusine*" class="disabled" id="txtCusine" maxlength="500" name="Cusine" />
+                    </div>
+                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 submit">
+                        <input class="btn-submit" type="button" value="Save" id="btnSave" />
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div id="dvRestaurant" style="width: 50%! important;" class="table-div th-leftalign td-leftalign">
+            <table  id="tableid"></table>
+        </div>
+    </div>
+</div>

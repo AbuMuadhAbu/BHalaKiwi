@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'DroidSansRegular';
+    src: url('droidsans.eot');
+    src: url('droidsans.eot') format('embedded-opentype'),
+         url('droidsans.woff') format('woff'),
+         url('droidsans.ttf') format('truetype'),
+         url('droidsans.svg#DroidSansRegular') format('svg');
+}

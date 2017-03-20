@@ -1,0 +1,170 @@
+﻿
+@{
+    ViewBag.Title = "Restaurant";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2PvfFNc8RXV5zOIXk1W8_LXaorEGFYQA" async defer></script>
+<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+@Scripts.Render("~/KiwiScripts/AdminRestaurantjs")
+<script src="~/KiwiScripts/GoogleMaps/jquery-gmaps-latlon-picker.js"></script>
+<div class="inner-right">
+    <div id="map"></div>
+
+    <div class="right-innerarea">
+        <div id="dvRestaurant" class="table-div th-leftalign td-leftalign">
+            <table id="tableid"></table>
+        </div>
+        <ul id="dvOutlet" class="nav nav-tabs" style="display:none">
+            <li class="active">
+                <a href="#ByOutlet" data-toggle="tab" id="btnByEmployee">Outlet</a>
+            </li>
+            <li>
+                <a href="#ByOffer" data-toggle="tab" id="btnByStaus">Offer</a>
+            </li>
+            <li style="float:right">
+                <nav class="p-t-15">
+                    <a id="btnBack" class="fa fa-arrow-circle-left" href="#">&nbsp;Approved Restaurant</a>
+                    <a id="rhead" class="fa fa-angle-right" href="#"></a>
+                </nav>
+            </li>
+        </ul>
+        <div style="display:none;" class="page-title clearfix">
+            <ul class="create-offlist manage-status">
+                <li class="drop-list">
+                    <div class="custom-select">
+                        <select id="ddlOutletFilter" name="Outlet"></select>
+                        <span class="select-arrow"></span>
+                    </div>
+                </li>
+                <li class="drop-list">
+                    <div class="custom-select">
+                        <select id="ddlOfferStatus" name="Outlet">
+                            <option selected="selected" value="0">Select All</option>
+                            <option value="1">Yet To Go Live Offers</option>
+                            <option value="2">Live Offers</option>
+                            <option value="3">Completed Offers</option>
+                        </select>
+                        <span class="select-arrow"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div id="dvOutlets" class="tab-content p-t-15" style="display:none">
+            <div class="tab-pane fade in active" id="ByOutlet">
+                <div class="table-div">
+                    <table id="Outlettableid"></table>
+                </div>
+            </div>
+            <div class="tab-pane fade in" id="ByOffer">
+                
+                <div class="table-div">
+                    <table id="Offertableid"></table>
+                </div>
+
+            </div>
+            @*<input type="button" value="Back" id="btnBack" />*@
+        </div>
+
+
+
+    </div>
+</div>
+
+<div id="dvViewOffer" class="modal fade signup-modal create-outlet-modal Create-offermodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <h2> Offer Details <a href="javascript:void(0);" data-dismiss="modal" class="close-modal">Close </a></h2>
+            <div class="page-title clearfix">
+                <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6 client-img">
+                    <div class="title-img">
+                        <img src="../content/images/kfc.png" id="imgOfferDetail" alt="KFC" />
+                    </div>
+                </div>
+            </div>
+            <div class="inner-formarea">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                        <label>Offer Name</label>
+                        <input type="text" id="txtVOfferName" />
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                        <label>Start Date</label>
+                        <input type="text" id="txtVStartDate" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                        <label>End Date</label>
+                        <input type="text" id="txtVEndDate" />
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                        <label>Orders Available</label>
+                        <input type="text" id="txtVOrdersAvailable" />
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                        <label>Offer Cost</label>
+                        <input type="text" id="txtVOfferCost" />
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                        <label>Offer Description</label>
+                        <textarea class="minitextarea" id="txtVOfferDescription"></textarea>
+                    </div>
+                </div>
+                <div class="submit button-btn">
+                    <input class="btn-cancel" type="reset" value="cancel" id="btnClear" />
+                    <input class="btn-submit" type="submit" value="Save" id="btnIndividualSave" style="display:none" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- create-outlet-popup Modal HTML start-->
+<div id="set-address-popup" class="modal fade signup-modal set-outlet-modal">
+    <div class="modal-dialog">
+        <form id="location">
+            <input type="hidden" id="hdnUser" />
+            <div class="modal-content">
+                <div class="address-options clearfix">
+                    <h3>Choose the Way you would like to Set Address  !!</h3>
+                    <ul class="clearfix">
+                        <li><input type="radio" name="gps" class=".gpsType" id="rdGPS" value="GPS" /><img src="~/Content/images/gps.png" /><label for="gps">Set using GPS</label></li>
+                        <li><input type="radio" name="gps" class=".gpsType" id="rdMap" value="Map" /><img src="~/Content/images/map-icon.png" /><label for="ongoogle-map">Pin On Google Map</label></li>
+                    </ul>
+                    <p>* Make sure this is the Correct Location. Once Address is set, it cannot be changed</p>
+                </div>
+                <div class="submit button-btn">
+                    <input class="btn-cancel" type="reset" data-dismiss="modal" value="cancel" />
+                    <input class="btn-submit" type="button" value="Update" id="btnLocationUpdate" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="googlemap-popup" class="modal fade signup-modal googlemap-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="google-map">
+                @*<textarea maxlength="150" id="txtAddress"></textarea>*@
+                <fieldset class="gllpLatlonPicker">
+                    <input type="text" class="gllpSearchField" />
+                    <input type="button" class="gllpSearchButton" value="search" />
+                    <br />
+                    <div class="gllpMap">Google Maps</div>
+                    @*<input type="hidden" class="gllpLatitude" value="38.01689374449758" />
+                        <input type="hidden" class="gllpLongitude" value="-95.99993930000005" />*@
+                    <input type="hidden" class="gllpLatitude" value="" />
+                    <input type="hidden" class="gllpLongitude" value="" />
+                    <input type="hidden" class="gllpZoom" value="4" />
+                </fieldset>
+            </div>
+            <div class="submit button-btn mini-btn">
+                <input class="btn-cancel" type="reset" data-dismiss="modal" value="cancel" />
+                <!--<input class="btn-submit" type="submit" data-dismiss="modal" value="OK" />-->
+            </div>
+        </div>
+    </div>
+</div>

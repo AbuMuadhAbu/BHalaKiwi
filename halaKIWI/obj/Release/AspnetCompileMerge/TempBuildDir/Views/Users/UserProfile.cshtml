@@ -1,0 +1,229 @@
+﻿
+@{
+    ViewBag.Title = "User Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Scripts.Render("~/KiwiScripts/UserProfilejs")
+<link href="~/Scripts/croppie.css" rel="stylesheet" />
+<script src="~/Scripts/croppie.js"></script>
+
+<div class="inner-right user-detailspage">
+    <input type="text" style="display:none;" id="txtRole" value="@HttpContext.Current.Session["RoleID"].ToString()" />
+    @*<div style="display:none;">
+            <input type="text" placeholder="Cusine Type*" id="txtCusineType" />
+        </div>*@
+    <div class="right-innerarea">
+        <div class="page-title clearfix">
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6 client-img">
+                    @if (HttpContext.Current.Session["RoleID"].ToString() == "2")
+            {
+                        <h2>Company Details</h2>
+                    }
+                    else
+                    {
+                        <h2>Branch Details</h2>
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 client-img">
+                    <div class="title-img">
+                        @*<img src="../content/images/kfc.png" alt="KFC" />*@
+                        <img src="" class="imgCompany" alt="KFC" />
+                        @if (HttpContext.Current.Session["RoleID"].ToString() == "2")
+                        {
+                            <a href="#uploadimage-popup" id="hrefEdit" data-toggle="modal">Upload</a>
+                        }
+                    </div>
+
+
+
+                </div>
+                <ul class="col-md-6 create-offlist editlist">
+
+                    @if (HttpContext.Current.Session["RoleID"].ToString() == "2")
+                    {
+                        <li class="edit-icon pull-right"><a href="#" id="btnEdit" title="Edit">Edit</a></li>
+                    }
+                    else
+                    {
+                        <li class="edit-icon pull-right"><a href="#" id="btnIndEdit" title="Edit">Edit</a></li>
+                    }
+                </ul>
+
+            </div>
+
+        </div>
+        @if (HttpContext.Current.Session["RoleID"].ToString() == "2")
+        {
+            <form id="frmmgUsrProfile">
+                <div class="inner-formarea">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                            <label>Company Name</label>
+                            <input type="text" placeholder="Company Name*" class="disabled" name="outlCompanyName" id="txtCompanyName" />
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                            <label>Email ID</label>
+                            <input type="text" placeholder="E-mail ID*" class="disabled" id="txtEmailID" name="outlEmailID" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                            <label>First Name</label>
+                            <input type="text" placeholder="First Name*" class="disabled" id="txtFirstName" name="outlFirstName" />
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                            <label>Last Name</label>
+                            <input type="text" placeholder="Last Name*" class="disabled" id="txtLastName" name="outlLastName" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                            <label>Position / Designation at Company</label>
+                            <input type="text" placeholder="Position / Designation at Company" class="disabled" id="txtDesignation" />
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                            <label>Phone No</label>
+                            <input onkeypress="return isNumber(event)" maxlength="13" type="text" name="outlPhone" class="disabled" placeholder="Company Phone No*" id="txtCompanyPhoneNo" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 form-left">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 input">
+                                    <label>Address 1</label>
+                                    <input type="text" placeholder="Company Address Line 1" class="disabled" id="txtAddress1" />
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 input ">
+                                    <label>Address 2</label>
+                                    <input type="text" placeholder="Company Address Line 2" id="txtAddress2" class="disabled" />
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 input citybox">
+                                    <label>City</label>
+                                    <input type="text" placeholder="City" id="txtCity" class="disabled" />
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 input zipcodebox">
+                                    <label>Zip Code</label>
+                                    <input type="text" placeholder="Zipcode" id="txtZipCode" class="disabled" onkeypress="return isNumber(event)" maxlength="8" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 form-right">
+                            <div class="input ">
+                                <label>Company Description</label>
+                                <textarea class="placecolor disabled" placeholder="Company Description" id="txtCompnayDescription"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="submit button-btn" id="savesection">
+                        <input class="btn-cancel" type="reset" value="cancel" id="btnClear" />
+                        <input class="btn-submit" type="button" value="Save" id="btnSave" />
+                    </div>
+                </div>
+            </form>
+        }
+        else
+        {
+
+            <form id="frmmgUsrIndividualProfile">
+                <div class="inner-formarea">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                            <label>Outlet Name</label>
+                            <input type="text" placeholder="Outlet Name*" class="disabled" id="txtOutletName" name="indOutletName" />
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                            <label>Email ID</label>
+                            <input type="text" placeholder="E-mail ID*" class="disabled" id="txtIndividualEmailID" name="indEmailID" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                            <label>Restaurant Name</label>
+                            <input type="text" placeholder="Restaurant Name*" class="disabled" id="txtRestaurantName" name="indRestaurantName" />
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <select id="txtCusineType" multiple="multiple" required name="indCusineType"></select>
+                            <label>Cuisine Selection (Max 4)</label>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                            <label>Phone No</label>
+                            <input type="text" placeholder="Company Phone No*" name="indPhoneNo" class="disabled" onkeypress="return isNumber(event)" maxlength="13" id="txtIndividualPhoneNo" />
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 input">
+                            <a href="#googlemap-popup" data-toggle="modal">Click Here to view Out Address in Map</a>
+                        </div>
+                    </div>
+                    <div class="submit button-btn" id="hideIndsavesection">
+                        <input class="btn-cancel" type="reset" value="cancel" id="btnIndClear" />
+                        <input class="btn-submit" type="button" value="Save" id="btnIndividualSave" />
+                    </div>
+                </div>
+            </form>
+        }
+    </div>
+</div>
+@*<script>
+        $(document).ready(function(){
+            winheight1 = $(document).height();
+            winheight = winheight1;
+            $('.inner-left').css('height', winheight);
+        });
+        $(window).resize(function(){
+            winheight1 = $(document).height();
+            winheight = winheight1;
+            $('.inner-left').css('height', winheight);
+        });
+    </script>*@
+<!-- upoad image popup Modal HTML start-->
+<div id="uploadimage-popup" class="modal fade signup-modal mini-modal uploadimage-modal">
+    <div class="modal-dialog">
+        <form id="frmmgGallery">
+            <div class="modal-content" style="width: 94%;">
+                <h2>Upload Image Dimension(100*100)</h2>
+                <div class="upload-btn">
+                    <label class="Upload-imgarrow" for="imageUploadForm" title="Upload Property img">
+                        <input id="imageUploadForm" type="file" style="display:none;">
+                        Upload Image
+                    </label>
+                </div>
+                <div id="demo-basic"></div>
+                <div class="submit button-btn">
+                    <input class="btn-cancel" type="reset" data-dismiss="modal" value="cancel" />
+                    <input class="btn-submit" type="button" value="Submit" id="btnSaveUserProfile" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- upoad image popup Modal HTML end-->
+<!-- upoad image popup Modal HTML end-->
+<div id="googlemap-popup" class="modal fade signup-modal googlemap-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="google-map">
+                @*<textarea maxlength="150" id="txtAddress"></textarea>*@
+                <fieldset class="gllpLatlonPicker">
+                    <input type="text" class="gllpSearchField" />
+                    <input type="button" class="gllpSearchButton" value="search" />
+                    <br />
+                    <div class="gllpMap">Google Maps</div>
+                    @*<input type="hidden" class="gllpLatitude" value="38.01689374449758" />
+                        <input type="hidden" class="gllpLongitude" value="-95.99993930000005" />*@
+                    <input type="hidden" class="gllpLatitude" value="38.01689374449758" />
+                    <input type="hidden" class="gllpLongitude" value="-95.99993930000005" />
+                    <input type="hidden" class="gllpZoom" value="4" />
+                </fieldset>
+            </div>
+            <div class="submit button-btn mini-btn">
+                <input class="btn-cancel" type="reset" data-dismiss="modal" value="cancel" />
+            </div>
+        </div>
+    </div>
+</div>

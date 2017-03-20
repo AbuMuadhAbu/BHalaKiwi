@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Scripts.Render("~/Content/js/kendoui/kendojs")
+@Scripts.Render("~/KiwiScripts/AdminDashboardjs")
+
+<div class="inner-right">
+
+    <div class="right-innerarea">
+        <div class="block one">
+        <div id="dvchart"></div>
+        </div>
+        <div class="block two">
+            <div id="dvRestaurant"></div></div>
+        <div class="block three">
+            <div id="dvBranch"></div>
+        </div>
+        <div class="block four">
+            <div id="dvMobile"></div>
+        </div>
+    </div>
+</div>

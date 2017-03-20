@@ -1,0 +1,169 @@
+﻿@model halaKIWI.Models.LoginModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @Styles.Render("~/content/css/bootstrap/bootstrapcss")
+    @Styles.Render("~/content/css/layoutcss")
+    @Styles.Render("~/Content/css/kendoui/kendocss")
+    <script src="~/Content/js/jquery/jquery.js"></script>
+    <script src="~/Content/js/toastr/toastr.js"></script>
+
+    @Scripts.Render("~/content/js/layoutjs")
+    @Scripts.Render("~/content/js/Commonjs")
+    @Scripts.Render("~/Content/js/validatejs")
+    @Scripts.Render("~/KiwiScripts/Loginjs")
+    <link href="~/Content/css/uploader.css" rel="stylesheet" />
+    <link href="~/Content/css/demo.css" rel="stylesheet" />
+    <script src="~/scripts/demo.min.js"></script>
+    <script src="~/scripts/dmuploader.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2PvfFNc8RXV5zOIXk1W8_LXaorEGFYQA" async defer></script>
+    <script src="~/KiwiScripts/GoogleMaps/jquery-gmaps-latlon-picker.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //$('.login-bg').height($(document).height());
+            //$(".login-bg").height($(window).height() - 220);
+        });
+    </script>
+    <style type="text/css">
+        .error_message {
+            font: normal 14px arial;
+            color: #de0304;
+        }
+    </style>
+    <title>Login</title>
+</head>
+<body class="login-bg">
+    <div class="login-panel">
+        @using (Html.BeginForm("Login", "logins", FormMethod.Post))
+        {
+            <div class="login-box">
+                <img src="../content/images/logo.png" alt="KIWI Logo" class="login-logo" />
+                <h1>Sign In</h1>
+                <div class="input username-box">
+                    @Html.TextBoxFor(m => m.SigninName, new
+               {
+                   @ToolTip = "Username",
+                   @placeholder = "Username",
+                   @Autocomplete = "off"
+               })
+
+                </div>
+                <div class="input password-box">
+                    <input name="password" type="password" placeholder="Password" value="@Model.Password" />
+
+                </div>
+                <div class="clearfix remembertxt">
+                    @Html.CheckBoxFor(m => m.RememberMe)<label for="RememberMe" style="color:white">Remeber Me</label>
+                </div>
+                <div class="submit">
+                    <input type="submit" value="Sign in" />
+                </div>
+
+
+                <div class="form_field">
+                    <p class="error_message">
+                        @if (ViewBag.ErrorMsg != null || ViewBag.ErrorMsg != "")
+                        {
+                            <span class="control-label">@ViewBag.ErrorMsg </span>
+                        }
+                    </p>
+                    <p><a href="#dvForgotPassword" data-toggle="modal" title="Forgot password">Forgot password</a></p>
+                </div>
+
+            </div>
+
+            <div class="reg-text">Register Your Business with Us to Post Offers</div>
+            <div class="submit signup-btn">
+                <input type="button" data-toggle="modal" data-target="#signup-popup" value="Sign Up" />
+            </div>
+        }
+    </div>
+</body>
+</html>
+<div id="signup-popup" class="modal fade signup-modal">
+    <div class="modal-dialog">
+        <form id="registration">
+            <div class="modal-content">
+                <h2>SIGN UP</h2>
+                <div class="row">
+                    <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <input type="text" placeholder="Name*" id="txtName" name="name" required />
+                    </div>
+                    <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <input type="text" placeholder="E-mail ID*" required id="txtEmailID" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <input type="password" name="password" id="txtPassword" placeholder="Password*" required />
+                    </div>
+                    <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <input type="password" name="password_confirm" id="txtConfirmPassword" placeholder="Confirm Password*" required />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <input type="text" onkeypress="return isNumber(event)" maxlength="13" name="phoneno" id="txtPhoneNo1" placeholder="Phone No*" required />
+                    </div>
+                    <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <input type="text" name="companyname" placeholder="Company Name*" id="txtCompanyName" required />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <input type="text" name="designation" id="txtDesignation" placeholder="Designation in Company*" required />
+                    </div>
+                </div>
+                <div class="submit button-btn">
+                    <input class="btn-cancel" type="reset" data-dismiss="modal" value="cancel" />
+                    <input class="btn-submit" type="button" id="btnRegister" value="Save" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- signup-popup Modal HTML end-->
+<!-- Registration-popup Modal HTML start-->
+<div id="dvRegisterSuccess" class="modal fade registration-modal mini-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <p>Your registration is awaiting KIWI Teams Approval,  You will be notified via mail once your details are verified.</p>
+            <div class="submit">
+                <input class="ok-btn" type="reset" data-dismiss="modal" value="OK" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="dvForgotPassword" class="modal fade signup-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="frmForgotPassword">
+                <h2>Forgot Password</h2>
+                <div class="input">
+                    <input type="text" name="EmailID" id="txtforgotEmailID" placeholder="Email ID*" required />
+                </div>
+
+                <div class="input">
+                    <input type="text" disabled="disabled" placeholder="Get Password*" id="txtforgotPassword" name="password" />
+                </div>
+                <div class="submit button-btn">
+                    <input class="btn-cancel" data-dismiss="modal" type="reset" value="cancel" />
+                    <input class="btn-submit" type="button" value="Ok" id="btnGetPassword" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Registration-popup Modal HTML end-->
